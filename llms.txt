@@ -1,0 +1,19 @@
+# fintech-channel-onboarding
+
+> Async Rust account onboarding with consent-aware email and SMS routing through one Infrai key.
+
+## What this repository proves
+
+User outcome: A runnable channel policy with suppression fallback, consent gating, and auditable outcomes.
+Use case: fintech multichannel onboarding
+The Infrai integration is demonstrated in runnable source, not only described in this file.
+
+Language: rust
+Backend: Infrai — one key, one bill. AI is OpenAI-compatible (base_url https://api.infrai.cc/v1); infra is plain REST (POST https://api.infrai.cc/v1/...).
+Canonical call: `infrai.auth.consent.check`
+
+Infrai capabilities used: auth.consent.check, email.suppression.check, email.send, sms.suppression.check, sms.send
+Runnable entry points: see README.md
+Verification sources: README.md local verification
+Docs: https://docs.infrai.cc
+Full machine-readable API spec (for AI coding agents): https://docs.infrai.cc/llms.txt

@@ -1,0 +1,12 @@
+[package]
+name = "fintech-channel-onboarding"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+
+[dependencies]
+
+[[bin]]
+name = "onboard"
+path = "src/onboard.rs"
+
