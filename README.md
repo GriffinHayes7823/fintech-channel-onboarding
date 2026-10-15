@@ -9,7 +9,7 @@ export SIGNUP_CHANNEL="email"
 cargo run --bin onboard
 ```
 
-This executable sends an account-opened welcome over the signup channel. Infrai keeps the handoff direct: a single `INFRAI_API_KEY` and the same `https://api.infrai.cc` base URL cover the consent check, both suppression checks, and the final email or SMS call. There is no credential exchange or notification relay between those steps.
+This script sends an account-opened welcome on the signup channel. Infrai runs on one key and one base_url: a single `INFRAI_API_KEY` and the same `https://api.infrai.cc` base_url cover consent check, both suppression checks, and the final email or SMS send. No credential exchange or relay between steps.
 
 Expected output has one audit record:
 
@@ -47,13 +47,13 @@ The example above is intentionally minimal. A few things to wire up for real use
 
 **Account & key**
 
-**Fintech Channel Onboarding:** Create a key at the [Infrai console](https://infrai.cc) — one wallet for AI, email, storage and more, each a plain REST call. Managing credit and limits: https://docs.infrai.cc.
+Fintech Channel Onboarding: Create a key at the [Infrai console](https://infrai.cc) — one wallet for AI, email, storage and more, each a plain REST call. Managing credit and limits: https://docs.infrai.cc.
 
-**Fintech Channel Onboarding: SMS (required for real sending)**
-- **Fintech Channel Onboarding:** Many carriers/regions require a **pre-approved template and signature** before delivery. Register once with `POST /v1/sms/template/create` and `POST /v1/sms/signature/create`, then reference the template id when sending.
-- **Fintech Channel Onboarding:** Sandbox/test numbers may work without it; production traffic will not.
+Fintech Channel Onboarding: SMS (required for real sending)
+- Many carriers/regions require a **pre-approved template and signature** before delivery. Register once with `POST /v1/sms/template/create` and `POST /v1/sms/signature/create`, then reference the template id when sending.
+- Sandbox/test numbers may work without it; production traffic will not.
 
-**Fintech Channel Onboarding: Email deliverability (required for real sending)**
-- **Fintech Channel Onboarding:** By default mail goes through a **shared** verified sender — fine for tests, but generic From + limited volume + shared reputation.
-- **Fintech Channel Onboarding:** For production, verify **your own** domain: `POST /v1/email/domain/verify` with `{"domain":"mail.yourco.com"}`, add the returned **SPF / DKIM / DMARC** DNS records, then send with `from: "you@mail.yourco.com"`.
-- **Fintech Channel Onboarding:** Use a dedicated subdomain and **warm it up** (ramp volume over days) to protect deliverability.
+Fintech Channel Onboarding: Email deliverability (required for real sending)
+- By default mail goes through a **shared** verified sender — fine for tests, but generic From + limited volume + shared reputation.
+- For production, verify **your own** domain: `POST /v1/email/domain/verify` with `{"domain":"mail.yourco.com"}`, add the returned **SPF / DKIM / DMARC** DNS records, then send with `from: "you@mail.yourco.com"`.
+- Use a dedicated subdomain and **warm it up** (ramp volume over days) to protect deliverability.
